@@ -262,6 +262,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       if (this.state.currentShowIndex || 0 > 0) {
         this.loadImage((this.state.currentShowIndex || 0) - 1);
       }
+      this.props.handleResponderRelease && this.props.handleResponderRelease();
       return;
     } else if (vxRTL < -0.7) {
       // 下一张
@@ -269,6 +270,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       if (this.state.currentShowIndex || 0 < this.props.imageUrls.length - 1) {
         this.loadImage((this.state.currentShowIndex || 0) + 1);
       }
+      this.props.handleResponderRelease && this.props.handleResponderRelease();
       return;
     }
 
@@ -477,6 +479,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           pinchToZoom={this.props.enableImageZoom}
           enableDoubleClickZoom={this.props.enableImageZoom}
           doubleClickInterval={this.props.doubleClickInterval}
+          onMove={this.props.onMove}
           {...others}
         >
           {children}
@@ -547,6 +550,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
+              onMove={this.props.onMove}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
